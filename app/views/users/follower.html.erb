@@ -1,0 +1,31 @@
+<table class='table'>
+  <thead>
+    <tr>
+      <th>image</th>
+      <th>email</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <div class='container px-5 px-sm-0'>
+        <div class='row'>
+          <h2>Follow Users</h2>
+          <% unless @followers.empty? %>
+            <% @followers.each do |follower| %>
+            <tr>
+              <td><%= attachment_image_tag(follower, :profile_image, :fill, 50, 50, fallback: "no-image-icon.jpg") %></td>
+              <td><%= follower.email %></td>
+              <td><p><%= "フォロー数: #{ follower.followings.count}" %></p></td>
+              <td><p><%= "フォロワー数: #{ follower.followers.count}" %></p></td>
+              <td><%= link_to 'Show', user_path(follower), class: "user_#{follower.id}" %></td>
+            </tr>
+            <% end %>
+          <% else %>
+              <td><%= "このユーザーにフォロワーはいません" %></td>
+            </tr>
+          <% end %>
+        </div>
+    </div>
+</tbody>
+</table>
